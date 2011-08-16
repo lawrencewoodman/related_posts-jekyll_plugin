@@ -1,0 +1,5 @@
+# Ignore backup text files
+*~
+
+# Ignore vi swap files
+*.swp

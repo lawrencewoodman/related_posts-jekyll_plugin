@@ -1,0 +1,19 @@
+= related_posts
+
+This is a {jekyll}[http://jekyllrb.com/] plugin that overrides the built in
+related_posts function to calculate related posts based on a posts categories.
+
+== Installation
+To register it as a plugin, copy <tt>_plugins/related_posts.rb</tt> to the
+<tt>_plugins</tt> directory of your jekyll project.
+
+== How to use it
+The plugin replaces the functionality of <tt>site.related_posts</tt> so you
+can use it as follows:
+  {% for post in site.related_posts %}
+    <a href="{{ post.url }}">{{ post.title }}</a><br />
+  {% endfor %}
+ 
+== Licence
+Copyright (c) 2011, Lawrence Woodman  
+This software is licensed under an MIT Licence.  Please see the file, LICENCE.rdoc, for details.
