@@ -14,12 +14,12 @@ module RelatedPosts
   # Returns [<Post>]
   def related_posts(posts)
     return [] unless posts.size > 1
-    highest_freq = Jekyll::Post.category_freq(posts).values.max
+    highest_freq = Jekyll::Post.tag_freq(posts).values.max
     related_scores = Hash.new(0)
     posts.each do |post|
-      post.categories.each do |category|
-        if self.categories.include?(category) && post != self
-          cat_freq = Jekyll::Post.category_freq(posts)[category]
+      post.tags.each do |tag|
+        if self.tags.include?(tag) && post != self
+          cat_freq = Jekyll::Post.tag_freq(posts)[tag]
           related_scores[post] += (1+highest_freq-cat_freq)
         end
       end
@@ -29,16 +29,16 @@ module RelatedPosts
   end
 
   module ClassMethods
-    # Calculate the frequency of each category.
+    # Calculate the frequency of each tag.
     #
-    # Returns {category => freq, category => freq, ...}
-    def category_freq(posts)
-      return @category_freq if @category_freq
-      @category_freq = Hash.new(0)
+    # Returns {tag => freq, tag => freq, ...}
+    def tag_freq(posts)
+      return @tag_freq if @tag_freq
+      @tag_freq = Hash.new(0)
       posts.each do |post|
-        post.categories.each {|category| @category_freq[category] += 1}
+        post.tags.each {|tag| @tag_freq[tag] += 1}
       end
-      @category_freq
+      @tag_freq
     end
 
     # Sort the related posts in order of their score and date

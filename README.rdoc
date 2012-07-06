@@ -1,7 +1,7 @@
 = related_posts
 
 This is a {jekyll}[http://jekyllrb.com/] plugin that overrides the built in
-related_posts function to calculate related posts based on a posts categories.
+related_posts function to calculate related posts based on a posts' tags.
 
 == Installation
 To register it as a plugin, copy <tt>_plugins/related_posts.rb</tt> to the
@@ -15,5 +15,5 @@ can use it as follows:
   {% endfor %}
  
 == Licence
-Copyright (c) 2011, Lawrence Woodman  
+Copyright (c) 2011-2012, Lawrence Woodman
 This software is licensed under an MIT Licence.  Please see the file, LICENCE.rdoc, for details.

@@ -4,13 +4,13 @@ require 'minitest/spec'
 require 'jekyll'
 require_relative '../_plugins/related_posts'
 
-def createPost(site, id, date, categories)
+def createPost(site, id, date, tags)
   file_dir = File.expand_path(File.dirname(__FILE__))
   post = Jekyll::Post.new(
     site, file_dir, 'source', "#{date}-post-#{id}.textile"
   )
   post.define_singleton_method(:id) {id}
-  post.define_singleton_method(:categories) {categories}
+  post.define_singleton_method(:tags) {tags}
   post
 end
 
