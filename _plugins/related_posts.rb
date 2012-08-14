@@ -26,7 +26,6 @@ module RelatedPosts
         end
       end
     end
-
     Jekyll::Post.sort_related_posts(related_scores)
   end
 
