@@ -19,7 +19,7 @@ module RelatedPosts
     posts.each do |post|
       post.tags.each do |tag|
         if self.tags.include?(tag) && post != self
-          if post.content.scan(tag).count > 0
+          if post.content.downcase.scan(tag.downcase).count > 0
             cat_freq = Jekyll::Post.tag_freq(posts)[tag]
             related_scores[post] += (1+highest_freq-cat_freq)
           end
