@@ -18,13 +18,13 @@ module RelatedPosts
     related_scores = Hash.new(0)
     posts.each do |post|
       post.tags.each do |tag|
-        if self.tags.include?(tag) && post != self
+        if post != self and self.tags.include?(tag)
           cat_freq = Jekyll::Post.tag_freq(posts)[tag]
-          related_scores[post] += (1+highest_freq-cat_freq)
+          content_freq = [4, 0.25 * post.content.downcase.scan(tag.downcase).count].min
+          related_scores[post] += (1 + highest_freq - cat_freq) + content_freq
         end
       end
     end
-
     Jekyll::Post.sort_related_posts(related_scores)
   end
 
