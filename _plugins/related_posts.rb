@@ -14,17 +14,14 @@ module RelatedPosts
   # Returns [<Post>]
   def related_posts(posts)
     return [] unless posts.size > 1
-    noise_words = "about|after|a|all|also|an|and|another|any|are|as|at|be|because|been|before|being|between|both|but|by|came|can|come|could|did|do|each|even|for|from|further|furthermore|get|got|had|has|have|he|her|here|hi|him|himself|how|however|i|if|in|indeed|into|is|its|just|like|made|many|may|me|might|more|moreover|most|much|must|my|never|not|now|of|on|only|or|other|our|out|over|put|said|same|see|she|should|since|some|still|such|take|than|that|the|their|them|then|there|therefore|these|they|this|those|through|thus|to|too|under|up|very|was|way|we|well|were|what|when|where|which|while|will|why|with|would|you|your"
     highest_freq = Jekyll::Post.tag_freq(posts).values.max
     related_scores = Hash.new(0)
     posts.each do |post|
       post.tags.each do |tag|
-        if self.tags.include?(tag) && post != self
-          if tag.length > 2 and not noise_words.split(/\|/).include?(tag.downcase)
-            content_freq = post.content.downcase.scan(tag.downcase).count
-            cat_freq = Jekyll::Post.tag_freq(posts)[tag]
-            related_scores[post] += (1+highest_freq-cat_freq) + content_freq
-          end
+        if post != self and self.tags.include?(tag)
+          cat_freq = Jekyll::Post.tag_freq(posts)[tag]
+          content_freq = [4, 0.25 * post.content.downcase.scan(tag.downcase).count].min
+          related_scores[post] += (1 + highest_freq - cat_freq) + content_freq
         end
       end
     end
