@@ -1,0 +1,11 @@
+{% if site.related_posts.size > 1 %}
+  <section>
+  <h1>Related Posts</h1>
+  {% for rpost in site.related_posts %}
+    {% if post.title == rpost.title %}
+    {% else %}
+      <div id="category-list"><a href="{{ rpost.url }}">{{ rpost.title }}</a></div>
+    {% endif %}
+  {% endfor %}
+  </section>
+{% endif %}
